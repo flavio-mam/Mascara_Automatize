@@ -1,61 +1,148 @@
-<h3>FORMULÁRIO DE ENCERRAMENTO DE CPE</h3>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Formulário Encerramento CPE</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-transform: none; }
+    input, textarea, select {
+      width: 100%;
+      margin-bottom: 10px;
+      text-transform: lowercase;
+    }
+    label { font-weight: bold; }
+    .resultado-container {
+      position: relative;
+      margin-top: 20px;
+    }
+    .resultado {
+      white-space: pre-wrap;
+      background: #f9f9f9;
+      border: 1px solid #ccc;
+      padding: 10px;
+      font-family: monospace;
+      line-height: 1.2;
+    }
+    .copiar-btn {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      font-size: 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      display: inline-block;
+    }
+    .copiar-btn:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <h3>FORMULÁRIO DE ENCERRAMENTO DE CPE</h3>
 
-<label>Nº da RAT:</label>
-<input type="text" id="rat">
+  <label>Nº da RAT:</label>
+  <input type="text" id="rat" />
 
-<label>Circuito:</label>
-<input type="text" id="circuito">
+  <label>Circuito:</label>
+  <input type="text" id="circuito" />
 
-<label>Modelo do CPE:</label>
-<input type="text" id="modelo">
+  <label>Modelo do CPE:</label>
+  <input type="text" id="modelo" />
 
-<label>Nº de Série do CPE:</label>
-<input type="text" id="serie">
+  <label>Nº de Série do CPE:</label>
+  <input type="text" id="serie" />
 
-<label>Equipamento:</label>
-<select id="equipamento">
-  <option>(  ) equipamento no local</option>
-  <option>(  ) instalado pelo técnico</option>
-</select>
+  <label>Equipamento:</label>
+  <select id="equipamento">
+    <option>equipamento no local</option>
+    <option>instalado pelo técnico</option>
+  </select>
 
-<label>Ciente no local (nome):</label>
-<input type="text" id="ciente">
+  <label>Ciente no local (nome):</label>
+  <input type="text" id="ciente" />
 
-<label>Suporte pelo analista:</label>
-<input type="text" id="analista">
+  <label>Suporte pelo analista:</label>
+  <input type="text" id="analista" />
 
-<label>Realizado pelo técnico:</label>
-<input type="text" id="tecnico">
+  <label>Realizado pelo técnico:</label>
+  <input type="text" id="tecnico" />
 
-<label>Teste final com o equipamento do cliente?</label>
-<select id="teste">
-  <option>(  )sim</option>
-  <option>(  )não</option>
-</select>
+  <label>Teste final com o equipamento do cliente?</label>
+  <select id="teste">
+    <option>sim</option>
+    <option>não</option>
+  </select>
 
-<label>Testado na rede gerenciada com:</label>
-<input type="text" id="gerenciada">
+  <label>Testado na rede gerenciada com:</label>
+  <input type="text" id="gerenciada" />
 
-<label>Contato:</label>
-<input type="text" id="contato">
+  <label>Contato:</label>
+  <input type="text" id="contato" />
 
-<label>Configurações executadas:</label>
-<textarea id="config" rows="3"></textarea>
+  <label>Configurações executadas:</label>
+  <textarea id="config" rows="3"></textarea>
 
-<label>Produtivo?</label>
-<select id="produtivo">
-  <option>(  )sim</option>
-  <option>(  )não</option>
-</select>
+  <label>Produtivo?</label>
+  <select id="produtivo">
+    <option>sim</option>
+    <option>não</option>
+  </select>
 
-<label>Motivo:</label>
-<textarea id="motivo" rows="2"></textarea>
+  <label>Motivo:</label>
+  <textarea id="motivo" rows="2"></textarea>
 
-<button onclick="gerar()">GERAR TEXTO</button>
+  <button onclick="gerar()">GERAR TEXTO</button>
 
-<hr>
+  <hr />
 
-<div class="resultado-container" id="container" style="display: none;">
-  <button class="copiar-btn" id="copiar" onclick="copiarTexto()">Copiar</button>
-  <div class="resultado" id="resultado"></div>
-</div>
+  <div class="resultado-container" id="container" style="display: none;">
+    <button class="copiar-btn" id="copiar" onclick="copiarTexto()">Copiar</button>
+    <div class="resultado" id="resultado"></div>
+  </div>
+
+  <script>
+    function min(id) {
+      return document.getElementById(id).value.toLowerCase();
+    }
+
+    function gerar() {
+      const texto = `###ENCERRAMENTO DE CPE###
+
+&&& MAMINFO
+
+Nº DA RAT: ${min('rat')}
+CIRCUITO: ${min('circuito')}
+MODELO DO CPE: ${min('modelo')}
+Nº DE SÉRIE DO CPE: ${min('serie')}
+${min('equipamento')}
+CIENTE NO LOCAL: SR(A) ${min('ciente')}
+SUPORTE PELO ANALISTA: ${min('analista')}
+REALIZADO PELO TÉCNICO: ${min('tecnico')}
+FOI REALIZADO TESTE FINAL COM O EQUIPAMENTO DO CLIENTE? ${min('teste')}
+TESTADO NA REDE GERENCIADA COM: ${min('gerenciada')}
+CONTATO: ${min('contato')}
+CONFIGURAÇÕES EXECUTADAS: ${min('config')}
+PRODUTIVO: ${min('produtivo')}
+MOTIVO: ${min('motivo')}`;
+
+      document.getElementById('resultado').innerText = texto.toUpperCase();
+      document.getElementById('container').style.display = 'block';
+    }
+
+    function copiarTexto() {
+      const texto = document.getElementById('resultado').innerText;
+      navigator.clipboard.writeText(texto).then(() => {
+        const btn = document.getElementById('copiar');
+        btn.innerText = 'Copiado!';
+        setTimeout(() => {
+          btn.innerText = 'Copiar';
+        }, 2000);
+      });
+    }
+  </script>
+</body>
+</html>
