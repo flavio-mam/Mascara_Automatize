@@ -1,0 +1,61 @@
+<h3>FORMULÁRIO DE ENCERRAMENTO DE CPE</h3>
+
+<label>Nº da RAT:</label>
+<input type="text" id="rat">
+
+<label>Circuito:</label>
+<input type="text" id="circuito">
+
+<label>Modelo do CPE:</label>
+<input type="text" id="modelo">
+
+<label>Nº de Série do CPE:</label>
+<input type="text" id="serie">
+
+<label>Equipamento:</label>
+<select id="equipamento">
+  <option>(  ) equipamento no local</option>
+  <option>(  ) instalado pelo técnico</option>
+</select>
+
+<label>Ciente no local (nome):</label>
+<input type="text" id="ciente">
+
+<label>Suporte pelo analista:</label>
+<input type="text" id="analista">
+
+<label>Realizado pelo técnico:</label>
+<input type="text" id="tecnico">
+
+<label>Teste final com o equipamento do cliente?</label>
+<select id="teste">
+  <option>(  )sim</option>
+  <option>(  )não</option>
+</select>
+
+<label>Testado na rede gerenciada com:</label>
+<input type="text" id="gerenciada">
+
+<label>Contato:</label>
+<input type="text" id="contato">
+
+<label>Configurações executadas:</label>
+<textarea id="config" rows="3"></textarea>
+
+<label>Produtivo?</label>
+<select id="produtivo">
+  <option>(  )sim</option>
+  <option>(  )não</option>
+</select>
+
+<label>Motivo:</label>
+<textarea id="motivo" rows="2"></textarea>
+
+<button onclick="gerar()">GERAR TEXTO</button>
+
+<hr>
+
+<div class="resultado-container" id="container" style="display: none;">
+  <button class="copiar-btn" id="copiar" onclick="copiarTexto()">Copiar</button>
+  <div class="resultado" id="resultado"></div>
+</div>
