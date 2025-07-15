@@ -1,0 +1,46 @@
+body {
+  font-family: Arial, sans-serif;
+  text-transform: none;
+}
+
+input, textarea, select {
+  width: 100%;
+  margin-bottom: 10px;
+  text-transform: lowercase;
+}
+
+label {
+  font-weight: bold;
+}
+
+.resultado-container {
+  position: relative;
+  margin-top: 20px;
+}
+
+.resultado {
+  white-space: pre-wrap;
+  background: #f9f9f9;
+  border: 1px solid #ccc;
+  padding: 10px;
+  font-family: monospace;
+  line-height: 1.2;
+}
+
+.copiar-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  font-size: 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.copiar-btn:hover {
+  background: #0056b3;
+}
