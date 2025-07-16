@@ -73,6 +73,7 @@
       background: linear-gradient(135deg, hsl(210, 100%, 45%), hsl(210, 100%, 55%));
       color: white;
       padding: 1rem 1.5rem;
+      position: relative;
     }
 
     .card-title {
@@ -183,6 +184,26 @@
 
     .btn-copy:hover {
       background: hsl(210, 100%, 40%);
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: transparent;
+      border: none;
+      color: white;
+      font-size: 1.2rem;
+      cursor: pointer;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .close-btn:hover {
+      color: hsl(0, 84%, 60%);
     }
 
     #resultCard {
@@ -389,6 +410,7 @@
           </svg>
           Resultado Gerado
         </div>
+        <button class="close-btn" onclick="fecharBalao()">✕</button>
       </div>
       <div class="result-content" id="resultado"></div>
     </div>
@@ -444,10 +466,18 @@ MOTIVO: ${getFieldValue('motivo')}`;
       copyButton.style.top = `calc(50% + ${resultCard.offsetHeight / 2 + 10}px)`;
     }
 
+    function fecharBalao() {
+      const resultCard = document.getElementById('resultCard');
+      const copyButton = document.getElementById('copyButton');
+      resultCard.style.display = 'none';
+      copyButton.style.display = 'none';
+    }
+
     function copiarTexto() {
       const texto = document.getElementById('resultado').textContent;
       navigator.clipboard.writeText(texto).then(() => {
         showToast('Texto copiado para a área de transferência!');
+        setTimeout(fecharBalao, 5000); // Fecha o balão após 5 segundos
       }).catch(() => {
         showToast('Erro ao copiar o texto', true);
       });
